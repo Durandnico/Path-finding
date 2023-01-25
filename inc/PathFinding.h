@@ -30,6 +30,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/*---------------------------DEFINE---------------------------------------------------*/
+
+/*! 
+ *  \def RIGHT_CLICK 
+ *  \brief keycode of the the right click
+ */
+#define RIGHT_CLICK 3  
+
+/*! 
+ *  \def LEFT_CLICK 1
+ *  \brief keycode of the the left click 
+ */
+#define LEFT_CLICK 1
+
+
+/*-------------------------STRUCTURES---------------------------------------------*/
 /*!
  *  \struct t_dataCase
  *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
@@ -118,6 +134,21 @@ struct      s_button
 };
 
 /*!
+ *  \struct s_keys
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Wed 25 January 2023 - 13:47:18
+ *  \brief data to know which keys are pressed
+ *  \param int_left_click   : boolean if the left click is pressed
+ *  \param int_right_click  : boolean if the right click is pressed
+ */
+
+typedef struct  s_keys {
+    int     int_left_click;
+    int     int_right_click;
+}               t_keys;
+
+/*!
  *  \struct t_recup
  *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
  *  \version 1.0
@@ -139,11 +170,13 @@ typedef struct      s_recup
 
     t_img           img_background;
     t_img*          ptr_img_sprites;
+    int             int_nb_sprite;
     int             int_pixel_per_case;
     
     int             int_window_width;
     int             int_window_height;
 
+    t_keys          key_pressed;
     t_button**      pptr_btn_board;
     int             int_btn_per_line;
     int             int_btn_per_row;
@@ -256,4 +289,57 @@ t_dataCase create_data(void);
  */
 void show_everything(t_recup* ptr_rcp_recup);
 
+/*----------------------------------KEY DRAWx-----------------------------------------------*/
+
+/*!
+ *  \fn int exit_prog(t_recup* ptr_rcp_recup)
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Wed 25 January 2023 - 12:53:16
+ *  \brief exit the prog properly
+ *  \param ptr_rcp_recup    : pointeur to all window's data
+ *  \return success : 0
+ */
+int exit_prog(t_recup* ptr_rcp_recup);
+
+/*!
+ *  \fn int mouse_press(int int_keycode, int int_x, int int_y, t_recup* ptr_rcp_recup)
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Tue 17 January 2023 - 12:24:03
+ *  \brief 
+ *  \param int_keycode      : code of the button press
+ *  \param int_x            : x coord of the mouse
+ *  \param int_y            : y coord of the mouse
+ *  \param ptr_rcp_recup    : pointeur to all window's data
+ *  \return set the key to true
+ */
+int mouse_press(int int_keycode, int int_x, int int_y, t_recup* ptr_rcp_recup);
+
+/*!
+ *  \fn int mouse_release(int keycode, int int_x, int int_y, t_recup* ptr_rcp_recup)
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Wed 25 January 2023 - 13:40:50
+ *  \brief 
+ *  \param keycode          : keycode of the button
+ *  \param int_x            : x coord of the mouse
+ *  \param int_y            : y coord of the mouse
+ *  \param ptr_rcp_recup    : pointeur to all window's data
+ *  \return set the key to false
+ */
+int mouse_release(int keycode, int int_x, int int_y, t_recup* ptr_rcp_recup);
+
+/*!
+ *  \fn int mouse_move(int int_x, int int_y, t_recup* ptr_rcp_recup)
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Wed 25 January 2023 - 13:54:03
+ *  \brief keep track of the mouse position and do stuff if click pressed
+ *  \param int_x            : x coord of the mouse
+ *  \param int_y            : y coord of the mouse
+ *  \param ptr_rcp_recup    : pointeur to all window's data
+ *  \return set button to wall if mouse is pressed on a button
+ */
+int mouse_move(int int_x, int int_y, t_recup* ptr_rcp_recup);
 #endif

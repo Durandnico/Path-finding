@@ -36,8 +36,8 @@ init(t_recup* ptr_rcp_recup)
     /*create the 3 sprites*/
     init_sprites(ptr_rcp_recup);
 
-    /*7init hooks functions*/
-    //init_hooks(ptr_rcp_recup);
+    /*init hooks functions*/
+    init_hooks(ptr_rcp_recup);
 
     /*init all button*/
     init_button(ptr_rcp_recup);
@@ -55,8 +55,8 @@ init(t_recup* ptr_rcp_recup)
 void
 init_sprites(t_recup*    ptr_rcp_recup)
 {
-    
-    ptr_rcp_recup->ptr_img_sprites = malloc(7 * sizeof(t_img));
+    ptr_rcp_recup->int_nb_sprite = 7;
+    ptr_rcp_recup->ptr_img_sprites = malloc(ptr_rcp_recup->int_nb_sprite * sizeof(t_img));
     int tint_colors[7] = {0xbfbfbf, 0x7D6D61, 0x00A9A5, 0xFFD166, 0x2E933C, 0xFF3C38, 0x0D00A4};
     
     /*image of case:
@@ -68,7 +68,7 @@ init_sprites(t_recup*    ptr_rcp_recup)
      *  5 : next visite
      *  6 : correct way
      */
-    for(int i = 0; i < 7; i++){
+    for(int i = 0; i < ptr_rcp_recup->int_nb_sprite; i++){
         ptr_rcp_recup->ptr_img_sprites[i].ptr_void_img  = mlx_new_image(ptr_rcp_recup->ptr_void_mlx, ptr_rcp_recup->int_pixel_per_case , ptr_rcp_recup->int_pixel_per_case);
 
         ptr_rcp_recup->ptr_img_sprites[i].ptr_char_addr = mlx_get_data_addr(ptr_rcp_recup->ptr_img_sprites[i].ptr_void_img, &ptr_rcp_recup->ptr_img_sprites[i].int_bits_per_pixel, &ptr_rcp_recup->ptr_img_sprites[i].int_line_length, &ptr_rcp_recup->ptr_img_sprites[i].int_endian);
@@ -121,4 +121,28 @@ init_background(t_recup* ptr_rcp_recup)
     for(int i = 0; i < ptr_rcp_recup->int_btn_per_line; i++)
         for(int j = 0; j < ptr_rcp_recup->int_btn_per_row; j++)
             drawn_sprite(&ptr_rcp_recup->img_background, ptr_rcp_recup->pptr_btn_board[i][j].img_sprite, ptr_rcp_recup->pptr_btn_board[i][j].img_sprite.pt_coord.int_x, ptr_rcp_recup->pptr_btn_board[i][j].img_sprite.pt_coord.int_y);
+}
+
+/*!
+ *  \proc void init_hooks(t_recup* ptr_rcp_recup)
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Wed 25 January 2023 - 12:48:23
+ *  \brief 
+ *  \param 
+ */
+void
+init_hooks(t_recup* ptr_rcp_recup)
+{
+    /*red cross to exit*/
+    mlx_hook(ptr_rcp_recup->ptr_void_win, 17, 0L, exit_prog, ptr_rcp_recup);
+
+    /*mouse click*/
+    mlx_hook(ptr_rcp_recup->ptr_void_win, 4, 1L<<2, mouse_press, ptr_rcp_recup);
+
+    /*mouse release*/
+    mlx_hook(ptr_rcp_recup->ptr_void_win, 5, 1L<<3, mouse_release, ptr_rcp_recup);
+
+    /*mouse move*/
+    mlx_hook(ptr_rcp_recup->ptr_void_win, 6, 1L<<6, mouse_move, ptr_rcp_recup);
 }
