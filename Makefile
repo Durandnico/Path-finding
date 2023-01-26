@@ -16,7 +16,7 @@ MLX_DIR = minilibx-linux
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:$(SRC_DIR)/%.c=%.o))
 
-# -j multifil (multi hreads) / ameliore la vitesse de compliation
+# -j multifil (multi threads) / ameliore la vitesse de compliation
 # --no-print-directory / n'affiche pas: make[N]: Leaving directory '...'
 all:
 	@$(MAKE) -j $(BIN_DIR)/$(NAME) --no-print-directory

@@ -53,7 +53,7 @@ t_button
 create_button(t_img img_sprite, int (*ptr_intf_func)(), int int_x, int int_y)
 {
     t_button    btn_new; //button to create
-    
+
     /*affect value*/
     btn_new.img_sprite = img_sprite;
     btn_new.ptr_intf_func = ptr_intf_func;
@@ -61,6 +61,23 @@ create_button(t_img img_sprite, int (*ptr_intf_func)(), int int_x, int int_y)
     btn_new.img_sprite.pt_coord.int_y = int_y;
     
     return (btn_new);
+}
+
+
+void
+change_btn_sprite(t_button* ptr_btn_button, t_img img_sprite)
+{
+    int int_x; //temp x position of the button
+    int int_y; //temp y position of the button
+
+    /*save position*/
+    int_x = ptr_btn_button->img_sprite.pt_coord.int_x;
+    int_y = ptr_btn_button->img_sprite.pt_coord.int_y;
+
+    /*affect new sprite*/
+    ptr_btn_button->img_sprite = img_sprite;
+    ptr_btn_button->img_sprite.pt_coord.int_x = int_x;
+    ptr_btn_button->img_sprite.pt_coord.int_y = int_y;
 }
 
 void

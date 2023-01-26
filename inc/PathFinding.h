@@ -212,6 +212,18 @@ drawn_sprite(t_img* ptr_img_base, t_img img_to_add, int int_x, int int_y);
  */
 t_button create_button(t_img img_sprite, int (*ptr_intf_func)(), int int_x, int int_y);
 
+
+/*!
+ *  \proc void change_btn_sprite(t_button* ptr_btn_button, t_img img_sprite)
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Thu 26 January 2023 - 18:59:30
+ *  \brief change the sprite of a button
+ *  \param ptr_btn_button   : pointer to the button
+ *  \param img_sprite       : new sprite of the button
+ */
+void change_btn_sprite(t_button* ptr_btn_button, t_img img_sprite);
+
 /*!
  *  \fn void my_mlx_pixel_put(t_img* ptr_img_base, int int_x, int int_y, int int_color)
  *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>

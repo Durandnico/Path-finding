@@ -72,7 +72,8 @@ mouse_press(int int_keycode, int int_x, int int_y, t_recup* ptr_rcp_recup)
 }
 
 
-int mouse_release(int int_keycode, int int_x, int int_y, t_recup* ptr_rcp_recup)
+int
+mouse_release(int int_keycode, int int_x, int int_y, t_recup* ptr_rcp_recup)
 {
     switch (int_keycode)
     {
@@ -91,7 +92,8 @@ int mouse_release(int int_keycode, int int_x, int int_y, t_recup* ptr_rcp_recup)
 }
 
 
-int mouse_move(int int_x, int int_y, t_recup* ptr_rcp_recup)
+int
+mouse_move(int int_x, int int_y, t_recup* ptr_rcp_recup)
 {
     int int_pox_x;
     int int_pox_y;
@@ -115,7 +117,8 @@ int mouse_move(int int_x, int int_y, t_recup* ptr_rcp_recup)
 }
 
 
-int key_press(int int_keycode, t_recup* ptr_rcp_recup)
+int
+key_press(int int_keycode, t_recup* ptr_rcp_recup)
 {
     switch (int_keycode)
     {
@@ -123,14 +126,14 @@ int key_press(int int_keycode, t_recup* ptr_rcp_recup)
         if(ptr_rcp_recup->ptr_btn_start != NULL)
             ptr_rcp_recup->ptr_btn_start->img_sprite = ptr_rcp_recup->ptr_img_sprites[0];
         
-        ptr_rcp_recup->ptr_btn_start = &ptr_rcp_recup->pptr_btn_board[0][0];
+        ptr_rcp_recup->ptr_btn_start = &ptr_rcp_recup->pptr_btn_board[10][0];
         ptr_rcp_recup->ptr_btn_start->img_sprite = ptr_rcp_recup->ptr_img_sprites[2];
         break;
     
     case ENTER:
         ptr_rcp_recup->ptr_btn_end->data.is_end = 0;
         ptr_rcp_recup->ptr_btn_end->img_sprite = ptr_rcp_recup->ptr_img_sprites[0];
-        ptr_rcp_recup->ptr_btn_end = &ptr_rcp_recup->pptr_btn_board[0][0];
+        ptr_rcp_recup->ptr_btn_end = &ptr_rcp_recup->pptr_btn_board[10][10];
         ptr_rcp_recup->ptr_btn_end->img_sprite = ptr_rcp_recup->ptr_img_sprites[3];
         
         break;

@@ -31,6 +31,7 @@ init(t_recup* ptr_rcp_recup)
     /*Create the window*/
     ptr_rcp_recup->ptr_void_mlx = mlx_init();
     ptr_rcp_recup->ptr_void_win = mlx_new_window(ptr_rcp_recup->ptr_void_mlx, ptr_rcp_recup->int_window_width, ptr_rcp_recup->int_window_height, "Pathfinding");
+    ptr_rcp_recup->ptr_btn_end = NULL;
 
     /*create the 3 sprites*/
     init_sprites(ptr_rcp_recup);
@@ -43,7 +44,13 @@ init(t_recup* ptr_rcp_recup)
 
     /*init background*/
     init_background(ptr_rcp_recup);
-        
+
+    /*print address of start */
+    ptr_rcp_recup->ptr_btn_start = &ptr_rcp_recup->pptr_btn_board[5][5];
+    change_btn_sprite(ptr_rcp_recup->ptr_btn_start, ptr_rcp_recup->ptr_img_sprites[2]);
+
+    printf("start : %p %p %d %d\n", ptr_rcp_recup->ptr_btn_start, &ptr_rcp_recup->pptr_btn_board[5][5], ptr_rcp_recup->ptr_btn_start->img_sprite.pt_coord.int_x, ptr_rcp_recup->ptr_btn_start->img_sprite.pt_coord.int_y);
+    
     /*update the screen*/
     show_everything(ptr_rcp_recup);
     
@@ -97,7 +104,7 @@ init_button(t_recup* ptr_rcp_recup)
         ptr_rcp_recup->pptr_btn_board[i]    =   malloc(ptr_rcp_recup->int_btn_per_line * sizeof(t_button));
 
         for(int j = 0; j < ptr_rcp_recup->int_btn_per_line; j++){
-            ptr_rcp_recup->pptr_btn_board[i][j]         =   create_button(ptr_rcp_recup->ptr_img_sprites[0], exit, 1 + j * (ptr_rcp_recup->int_pixel_per_case), 1 + i * (ptr_rcp_recup->int_pixel_per_case));
+            ptr_rcp_recup->pptr_btn_board[i][j]         =   create_button(ptr_rcp_recup->ptr_img_sprites[0], NULL, 1 + j * (ptr_rcp_recup->int_pixel_per_case), 1 + i * (ptr_rcp_recup->int_pixel_per_case));
             ptr_rcp_recup->pptr_btn_board[i][j].data    =   create_data();
         }
     }
