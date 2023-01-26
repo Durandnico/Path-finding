@@ -59,14 +59,8 @@
 
 
 /*-------------------------STRUCTURES---------------------------------------------*/
-/*!
- *  \struct t_dataCase
- *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
- *  \version 1.0
- *  \date Sun 15 January 2023 - 03:22:55
- *  \brief 
- *  \param 
- */
+
+// typedef struct      s_recup to use it in the data structure
 typedef struct s_button t_button;
 
 typedef struct      s_dataCase
@@ -132,10 +126,10 @@ typedef struct      s_img
  *  \date Fri 06 January 2023 - 21:45:44
  *  \updated Sat 14 January 2023 - 12:35:24
  *  \brief structure of a button
- *  \param img_sprite       :
- *  \param ptr_intf_func    :
- *  \param int_state        :
- *  \param data             :   
+ *  \param img_sprite       : image of the button
+ *  \param ptr_intf_func    : pointer to the function to call when the button is pressed
+ *  \param int_state        : state of the button (0 = not pressed, 1 = pressed)
+ *  \param data             : data of the button
  */
 
 struct      s_button
@@ -209,9 +203,12 @@ drawn_sprite(t_img* ptr_img_base, t_img img_to_add, int int_x, int int_y);
  *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
  *  \version 1.0
  *  \date Fri 06 January 2023 - 21:45:27
- *  \brief 
- *  \param 
- *  \return 
+ *  \brief initialize a button
+ *  \param  img_sprite      : image of the button
+ *  \param  ptr_intf_func   : pointer to the function to call when the button is pressed
+ *  \param  int_x           : x position of the button
+ *  \param  int_y           : y position of the button
+ *  \return a button with all data
  */
 t_button create_button(t_img img_sprite, int (*ptr_intf_func)(), int int_x, int int_y);
 
@@ -220,9 +217,11 @@ t_button create_button(t_img img_sprite, int (*ptr_intf_func)(), int int_x, int 
  *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
  *  \version 1.0
  *  \date Fri 06 January 2023 - 23:11:32
- *  \brief 
- *  \param 
- *  \return 
+ *  \brief put a pixel in an image
+ *  \param ptr_img_base     : pointeur to an image
+ *  \param int_x            : x position of the pixel
+ *  \param int_y            : y position of the pixel
+ *  \param int_color        : color of the pixel
  */
 void my_mlx_pixel_put(t_img* ptr_img_base, int int_x, int int_y, int int_color);
 
@@ -260,7 +259,7 @@ void init(t_recup* ptr_rcp_recup);
  *  \brief init all sprites
  *  \param ptr_rcp_recup    : pointeur to all window's data
  */
-void init_sprites(t_recup*);
+void init_sprites(t_recup* ptr_rcp_recup);
 
 /*!
  *  \proc void init_button(t_recup* ptr_rcp_recup)
