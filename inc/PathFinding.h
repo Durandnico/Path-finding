@@ -44,6 +44,19 @@
  */
 #define LEFT_CLICK 1
 
+/*! 
+ *  \def SPACE 32
+ *  \brief keycode of the space bar
+ */
+#define SPACE 32
+
+
+/*! 
+ *  \def ENTER 36
+ *  \brief keycode of the enter key
+ */
+#define ENTER 65293
+
 
 /*-------------------------STRUCTURES---------------------------------------------*/
 /*!
@@ -61,6 +74,7 @@ typedef struct      s_dataCase
     t_button*   ptr_btn_previous;
     t_button*   ptr_btn_next;
 
+    int         has_been_visited;
     int         is_end;
     int         isWall;
     int         int_distTarget;
@@ -180,6 +194,9 @@ typedef struct      s_recup
     t_button**      pptr_btn_board;
     int             int_btn_per_line;
     int             int_btn_per_row;
+
+    t_button*       ptr_btn_start;
+    t_button*       ptr_btn_end;
 }                   t_recup;
 
 
@@ -265,7 +282,15 @@ void init_button(t_recup* ptr_rcp_recup);
  */
 void init_background(t_recup* ptr_rcp_recup);
 
-
+/*!
+ *  \proc void init_hooks(t_recup* ptr_rcp_recup)
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Wed 25 January 2023 - 12:48:23
+ *  \brief init all hooks function
+ *  \param ptr_rcp_recup    : pointeur to all window's data
+ */
+void init_hooks(t_recup* ptr_rcp_recup);
 /*----------------------------------FUNCTION-----------------------------------------------*/
 
 /*!
@@ -307,12 +332,12 @@ int exit_prog(t_recup* ptr_rcp_recup);
  *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
  *  \version 1.0
  *  \date Tue 17 January 2023 - 12:24:03
- *  \brief 
+ *  \brief set the key to true
  *  \param int_keycode      : code of the button press
  *  \param int_x            : x coord of the mouse
  *  \param int_y            : y coord of the mouse
  *  \param ptr_rcp_recup    : pointeur to all window's data
- *  \return set the key to true
+ *  \return change the key to true in recup
  */
 int mouse_press(int int_keycode, int int_x, int int_y, t_recup* ptr_rcp_recup);
 
@@ -321,12 +346,12 @@ int mouse_press(int int_keycode, int int_x, int int_y, t_recup* ptr_rcp_recup);
  *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
  *  \version 1.0
  *  \date Wed 25 January 2023 - 13:40:50
- *  \brief 
+ *  \brief set the key to false
  *  \param keycode          : keycode of the button
  *  \param int_x            : x coord of the mouse
  *  \param int_y            : y coord of the mouse
  *  \param ptr_rcp_recup    : pointeur to all window's data
- *  \return set the key to false
+ *  \return change the key to false in recup
  */
 int mouse_release(int keycode, int int_x, int int_y, t_recup* ptr_rcp_recup);
 
@@ -336,10 +361,23 @@ int mouse_release(int keycode, int int_x, int int_y, t_recup* ptr_rcp_recup);
  *  \version 1.0
  *  \date Wed 25 January 2023 - 13:54:03
  *  \brief keep track of the mouse position and do stuff if click pressed
+ *  \param keycode          : keycode of the button
  *  \param int_x            : x coord of the mouse
  *  \param int_y            : y coord of the mouse
  *  \param ptr_rcp_recup    : pointeur to all window's data
  *  \return set button to wall if mouse is pressed on a button
  */
 int mouse_move(int int_x, int int_y, t_recup* ptr_rcp_recup);
+
+/*!
+ *  \fn int key_press(int int_keycode, t_recup* ptr_rcp_recup)
+ *  \author DURAND Nicolas Erich Pierre <nicolas.durand@cy-tech.fr>
+ *  \version 1.0
+ *  \date Thu 26 January 2023 - 15:56:21
+ *  \brief intercept key press
+ *  \param int_keycode      : code of the button press
+ *  \param ptr_rcp_recup    : pointeur to all window's data
+ *  \return set the new starting point and the new ending point
+ */
+int key_press(int int_keycode, t_recup* ptr_rcp_recup);
 #endif

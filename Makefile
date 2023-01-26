@@ -4,7 +4,7 @@ NAME = PathFinding
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -g -Og
+CFLAGS = -Wall -Wextra -g -Og #-fsanitize=address
 LDFLAGS = -lmlx -lm -lbsd -lX11 -lXext
 
 OBJ_DIR = obj
@@ -22,7 +22,7 @@ all:
 	@$(MAKE) -j $(BIN_DIR)/$(NAME) --no-print-directory
 
 # permet de pouvoir comparer la derniere modification de la dep par rapport a la regle
-$(BIN_DIR)/$(NAME): $(OBJ)
+$(BIN_DIR)/$(NAME): $(OBJ) .gitignore
 	@mkdir -p $(BIN_DIR)
 	$(CC) -o $@ -L $(MLX_DIR) $(OBJ) $(LDFLAGS)
 	@echo $(NAME) : created !
@@ -59,10 +59,18 @@ docHtml:
 
 re: clean all
 
+.gitignore:
+	@echo $(OBJ_DIR) > .gitignore
+	@echo $(BIN_DIR) >> .gitignore
+	@echo $(DOC_DIR) >> .gitignore
+	@echo *.log >> .gitignore
+	@echo ".gitignore created !"
 
 #Un peu inutile mais CY-tech le veux dans son Makefile
 save:
 	cp -r src .save
+	echo .save >> .gitignore
+	@echo "save src and update .gitignore"
 
 restore:
 	cp -fr .save restore

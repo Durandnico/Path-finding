@@ -44,8 +44,8 @@ show_everything(t_recup* ptr_rcp_recup)
 {
     mlx_clear_window(ptr_rcp_recup->ptr_void_mlx, ptr_rcp_recup->ptr_void_win);
 
-    for(int i = 0; i < ptr_rcp_recup->int_btn_per_line; i++)
-        for(int j = 0; j < ptr_rcp_recup->int_btn_per_row; j++)
+    for(int i = 0; i < ptr_rcp_recup->int_btn_per_row; i++)
+        for(int j = 0; j < ptr_rcp_recup->int_btn_per_line; j++)
             drawn_sprite(&ptr_rcp_recup->img_background, ptr_rcp_recup->pptr_btn_board[i][j].img_sprite, ptr_rcp_recup->pptr_btn_board[i][j].img_sprite.pt_coord.int_x, ptr_rcp_recup->pptr_btn_board[i][j].img_sprite.pt_coord.int_y);
 
     mlx_put_image_to_window(ptr_rcp_recup->ptr_void_mlx, ptr_rcp_recup->ptr_void_win, ptr_rcp_recup->img_background.ptr_void_img, 0, 0);

@@ -53,7 +53,7 @@ t_button
 create_button(t_img img_sprite, int (*ptr_intf_func)(), int int_x, int int_y)
 {
     t_button    btn_new; //button to create
-
+    
     /*affect value*/
     btn_new.img_sprite = img_sprite;
     btn_new.ptr_intf_func = ptr_intf_func;
